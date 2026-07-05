@@ -1,0 +1,105 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --bg-sidebar: #000000;
+  --bg-main: #F4F5F7;
+  --card-white: #FFFFFF;
+  --text-primary: #111111;
+  --text-secondary: #929292;
+  --accent-blue: #3B82F6;
+  --accent-purple: #A855F7;
+  --accent-orange: #F97316;
+  --border-light: #E5E7EB;
+}
+
+body {
+  background-color: var(--bg-sidebar);
+  color: var(--text-primary);
+  font-family: 'Inter', var(--font-sans);
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
+}
+
+@layer components {
+  .dashboard-container {
+    @apply flex h-screen w-full overflow-hidden bg-black;
+  }
+  
+  .sidebar {
+    @apply w-80 h-full flex flex-col pt-16 pb-8 shrink-0 bg-black overflow-y-auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .sidebar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .nav-item {
+    @apply flex items-center gap-4 px-12 py-5 text-[#929292] hover:text-white transition-all cursor-pointer font-bold text-lg;
+  }
+  
+  .nav-item.active {
+    @apply text-white;
+  }
+  
+  .main-content {
+    @apply flex-1 h-full bg-white rounded-l-[60px] shadow-2xl overflow-hidden p-12;
+  }
+  
+  .transaction-card {
+    @apply flex items-center justify-between py-6 border-b border-gray-100 last:border-0;
+  }
+  
+  .icon-circle {
+    @apply w-14 h-14 rounded-full flex items-center justify-center text-white shrink-0;
+  }
+
+  .status-label {
+    @apply text-[10px] uppercase tracking-[0.2em] text-[#929292] font-bold;
+  }
+
+  .scan-line {
+    @apply absolute left-0 right-0 h-[2px] bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] z-10;
+    animation: scan 3s linear infinite;
+  }
+
+  @keyframes scan {
+    0% { top: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 3s ease-in-out infinite;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .markdown-body strong {
+    @apply font-black text-blue-500 underline decoration-blue-500/30 underline-offset-2;
+  }
+
+  .markdown-body p {
+    @apply mb-2 last:mb-0;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.02); }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "VeriCheck AI",
+  "description": "AI-powered fake product detection system using image analysis and verification.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

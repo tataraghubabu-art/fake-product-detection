@@ -1,0 +1,49 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Information about the authenticated user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email", "description": "User's email address" },
+        "displayName": { "type": "string", "description": "User's display name" },
+        "photoURL": { "type": "string", "description": "User's profile photo URL" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the user first signed in" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Scan": {
+      "title": "Product Scan",
+      "description": "A record of a product verification scan.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The UID of the user who performed the scan" },
+        "productName": { "type": "string", "description": "The name of the detected product" },
+        "brandName": { "type": "string", "description": "The brand name of the product" },
+        "manufacturingLocation": { "type": "string", "description": "Likely manufacturing location" },
+        "manufactureDate": { "type": "string", "description": "The manufacturing date found on packaging" },
+        "manufacturePlace": { "type": "string", "description": "The specific manufacturing place or factory location" },
+        "isGenuine": { "type": "boolean", "description": "Whether the product is genuine" },
+        "confidence": { "type": "number", "description": "Confidence score of the analysis" },
+        "estimatedPrice": { "type": "string", "description": "Estimated market value" },
+        "image": { "type": "string", "description": "Base64 or URL of the scanned image" },
+        "timestamp": { "type": "integer", "description": "Unix timestamp of the scan" },
+        "reasoning": { "type": "string", "description": "AI's reasoning for the verdict" },
+        "anomalies": { "type": "array", "items": { "type": "string" }, "description": "List of detected anomalies" },
+        "tips": { "type": "array", "items": { "type": "string" }, "description": "Verification protocols/tips" }
+      },
+      "required": ["uid", "productName", "isGenuine", "confidence", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile document"
+    },
+    "/scans/{scanId}": {
+      "schema": "Scan",
+      "description": "Individual product scan record"
+    }
+  }
+}
